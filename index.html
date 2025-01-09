@@ -1,12 +1,35 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-　<meta charset="UTF-8">
-　<meta name="viewport" content="width=device-width, initial-scale=1.0">
-　<title>サンプルHTML</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindustry MOD Generator</title>
 </head>
 <body>
-　<h2>見出し</h2>
-　<p>文章を書く場所</p>
+    <h1>Mindustry MOD Generator</h1>
+    <form action="/generate" method="POST">
+        <label for="mod_name">MOD名:</label>
+        <input type="text" id="mod_name" name="mod_name" required><br><br>
+        
+        <label for="version">バージョン:</label>
+        <input type="text" id="version" name="version" required><br><br>
+        
+        <label for="description">説明:</label>
+        <textarea id="description" name="description" required></textarea><br><br>
+        
+        <label for="author">作成者:</label>
+        <input type="text" id="author" name="author" required><br><br>
+        
+        <label for="block_name">ブロック名:</label>
+        <input type="text" id="block_name" name="block_name" required><br><br>
+        
+        <label for="block_health">ブロックの耐久値:</label>
+        <input type="number" id="block_health" name="block_health" required><br><br>
+        
+        <label for="block_cost">ブロックのコスト:</label>
+        <input type="number" id="block_cost" name="block_cost" required><br><br>
+        
+        <button type="submit">MOD生成</button>
+    </form>
 </body>
 </html>
