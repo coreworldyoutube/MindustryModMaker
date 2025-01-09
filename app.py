@@ -1,6 +1,5 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request
 import hjson
-import os
 
 app = Flask(__name__)
 
@@ -9,7 +8,7 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-# フォーム送信時にMODファイルを生成
+# フォーム送信時にMOD設定を生成
 @app.route('/generate', methods=['POST'])
 def generate():
     # フォームデータの取得
@@ -18,7 +17,6 @@ def generate():
     description = request.form.get('description')
     author = request.form.get('author')
     block_name = request.form.get('block_name')
-    block_health = int(request.form.get('block_health'))
     block_cost = int(request.form.get('block_cost'))
     
     # MOD設定データ
@@ -30,19 +28,16 @@ def generate():
         'blocks': [
             {
                 'name': block_name,
-                'health': block_health,
                 'buildCost': block_cost
             }
         ]
     }
 
-    # HJSONファイルの生成
-    file_path = 'mod.hjson'
-    with open(file_path, 'w') as file:
-        hjson.dump(mod_data, file, indent=2)
+    # HJSON形式の文字列を生成
+    mod_hjson = hjson.dumps(mod_data, indent=2)
 
-    # 生成したHJSONファイルをダウンロードできるように
-    return send_file(file_path, as_attachment=True)
+    # HJSONをテキストとして表示する
+    return render_template('result.html', mod_hjson=mod_hjson)
 
 if __name__ == '__main__':
     app.run(debug=True)
